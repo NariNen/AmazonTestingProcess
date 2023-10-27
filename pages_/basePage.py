@@ -9,10 +9,22 @@ class BasePage():
 
     def _find_element(self, By, value):
         try:
-            element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(By, value))
+            element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By, value)))
+
+            return element
         except:
             print("Error:Element Not found")
             exit(1)
 
-    def _get_title(self):
+    def _click(self, webElement):
+        webElement.click()
+
+    def _fill_field(self, webElement, text):
+        webElement.clear()
+        webElement.send_keys(text)
+
+    def _get_title(self,):
         return self.driver.title
+
+    def _get_text(self, webElement):
+        return webElement.text
